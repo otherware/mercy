@@ -1,33 +1,48 @@
+# Mercy
+
 Flow control library focused on readability, convenience & analytics.
 
-# Introduction
+## Table of Contents
+
+- [Mercy](#mercy)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [API](#api)
+  - [Usage](#usage)
+  - [Examples](#examples)
+    - [Building basic flows](#building-basic-flows)
+  - [Test case usage](#test-case-usage)
+
+## Introduction
 
 Tired of...
+
 - Entering into a new code base with no information? unknown execution paths?
 - Juggling asynchronous operations with flow control optimization?
 - Building a mock server because your upstream is often unstable or offline?
 
 What if there exists a way to...
+
 - Allow you to create a simple structure that clearly describes your application and/or business logic lifecycle?
 - Promote sharing by offering deferred execution for all constructed flows?
 - Automatically instrument analytics for all execution paths?
 
 This is [`Mercy`](https://github.com/bmille29/mercy); A hybrid API between [`Async`](https://github.com/caolan/async) and [`Joi`](https://github.com/hapijs/joi)
 
-# API
+## API
 
 See the detailed [API Reference](https://github.com/bmille29/mercy/blob/master/API.md).
 
 
-# Usage
+## Usage
 
 Usage is a two steps process. First, a flow must be constructed:
 
 ```javascript
 const echo = function (value, next) { return next(null, value); };
 
-const flow1 = Mercy.flow(echo)              // series   - Rest () notation   
-const flow2 = Mercy.flow([echo]);           // series   - Array [] notation  
+const flow1 = Mercy.flow(echo)              // series   - Rest () notation
+const flow2 = Mercy.flow([echo]);           // series   - Array [] notation
 const flow3 = Mercy.flow({ task_0: echo }); // parallel - Object {} notation
 const flow4 = Mercy.flow({                 // auto (dependencies get injected via `...spread` operator)
     echo: echo,
@@ -71,10 +86,10 @@ Mercy.execute(flow1, callback);
 Mercy.execute(flow2, callback);
 ```
 
+## Examples
 
-# Examples
+### Building basic flows
 
-## Building basic flows
 ```javascript
 const Mercy = require('mercy');
 
@@ -83,15 +98,17 @@ const echo = function (value, next) { return next(null, value); };
 ```
 
 **Empty**
+
 ```javascript
 const empty = Mercy.flow();
 ```
 
 **Series**
+
 ```javascript
 // Series automatically propagates a flow's input/output to proceeding task
-let series = Mercy.flow(echo);               // Rest () notation   
-let series = Mercy.flow([echo]);             // Array [] notation  
+let series = Mercy.flow(echo);               // Rest () notation
+let series = Mercy.flow([echo]);             // Array [] notation
 let series = Mercy.flow({ echo }).series();  // Object {} notation
 
 Mercy.execute('foobar', series, (err, meta, data, result) => {
@@ -103,6 +120,7 @@ Mercy.execute('foobar', series, (err, meta, data, result) => {
 ```
 
 **Parallel**
+
 ```javascript
 // Parallel does not propagate flow's input.
 // Similar to `auto()`, you must specify a `final()` task to select results.
@@ -122,6 +140,7 @@ Mercy.execute('foobar', parallel, (err, meta, data, result) => {
 ```
 
 **Auto**
+
 ```javascript
 // Auto does not propagate input. However, it does make use of dependency injection.
 // Similar to `parallel()`, you must specify a `final()` task to select results.
@@ -144,6 +163,4 @@ Mercy.execute('foobar', auto, (err, meta, data, result) => {
 
 ```javascript
 const Mercy = require('mercy');
-
-
 ```

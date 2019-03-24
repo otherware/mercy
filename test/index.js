@@ -22,10 +22,8 @@ const expect = Code.expect;
 // Declare internals
 
 const internals = {
-    /* eslint-disable brace-style, hapi/hapi-scope-start */
     noop: (data, next) => { return next(); },
     echo: (value, next) => { return next(null, value); },
-    /* eslint-enable brace-style, hapi/hapi-scope-start */
     console: (value, next) => {
 
         console.log({ value });

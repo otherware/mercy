@@ -1,36 +1,34 @@
 {
   "name": "mercy",
-  "version": "0.0.2",
   "description": "Flow control library",
-  "keywords": [
-    "flow",
-    "control",
-    "test",
-    "helper"
-  ],
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "main": "./lib/index.js",
-  "scripts": {
-    "clean": "rm -rf node_modules",
-    "test": "lab -m 90000",
-    "test-cov": "lab -m 90000 -L -v -t 100",
-    "test-cov-html": "lab -m 90000 -L -v -t 100 -r html -o coverage.html",
-    "test-cov-json": "lab -m 90000 -L -v -t 100 -r json -o coverage.json"
-  },
+  "version": "0.0.2",
+  "main": "lib/index.js",
+  "repository": "git@github.com:otherware/mercy.git",
   "engines": {
     "node": ">=8.x.x",
     "npm": ">=5.x.x"
   },
+  "keywords": [
+    "async",
+    "control",
+    "flow"
+  ],
+  "scripts": {
+    "clean": "rm -rf node_modules package-lock.json",
+    "linter": "lab -L",
+    "reinstall": "rm -rf node_modules package-lock.json; npm i",
+    "test": "lab -L -v -t 100",
+    "test-cov": "lab -L -v -t 100",
+    "test-cov-html": "lab -L -v -t 100 -r html -o coverage.html",
+    "test-cov-json": "lab -L -v -t 100 -r json -o coverage.json"
+  },
   "dependencies": {
     "async": "2.x.x",
     "chalk": "2.x.x",
-    "fs-extra": "5.x.x",
+    "fs-extra": "7.x.x",
     "glue": "4.x.x",
     "hoek": "4.x.x",
-    "joi": "13.x.x",
+    "joi": "14.x.x",
     "nock": "9.x.x",
     "purdy": "3.x.x",
     "urijs": "1.x.x",
@@ -38,7 +36,7 @@
   },
   "devDependencies": {
     "blipp": "3.x.x",
-    "code": "4.x.x",
+    "code": "5.x.x",
     "good-console": "6.x.x",
     "good-file": "6.x.x",
     "good-squeeze": "5.x.x",
