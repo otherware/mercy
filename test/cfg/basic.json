@@ -1,0 +1,9 @@
+{
+  "server": { "load": { "sampleInterval": 1000 } },
+  "connections": [{
+    "labels": ["api", "http"],
+    "load": { "maxHeapUsedBytes": 1073741824, "maxRssBytes": 2147483648, "maxEventLoopDelay": 5000 },
+    "routes": { "timeout": { "server": 60000 } }
+  }],
+  "registrations": []
+}

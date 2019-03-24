@@ -1,0 +1,61 @@
+{
+  "server": { "load": { "sampleInterval": 1000 } },
+  "connections": [{
+    "labels": ["api", "http"],
+    "load": { "maxHeapUsedBytes": 1073741824, "maxRssBytes": 2147483648, "maxEventLoopDelay": 5000 },
+    "routes": { "timeout": { "server": 60000 } }
+  }],
+  "registrations": [
+    { "plugin": "blipp" },
+    { "plugin": "hapi-swagger" },
+    { "plugin": "inert" },
+    { "plugin": "vision" },
+    {
+      "plugin": {
+        "register": "good",
+        "options": {
+          "includes": { "request": ["headers", "payload"], "response": ["payload"] },
+          "ops": { "interval": 5000 },
+          "wreck": true,
+          "reporters": {
+            "console": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "ops": "*", "error": "*", "log": "*", "request": "*", "response": "*", "wreck": "*" }] },
+              { "module": "good-console" },
+              "stdout"
+            ],
+            "file-error": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "error": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/error.log"] }
+            ],
+            "file-log": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "log": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/log.log"] }
+            ],
+            "file-ops": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "ops": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/ops.log"] }
+            ],
+            "file-request": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "request": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/request.log"] }
+            ],
+            "file-response": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "response": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/response.log"] }
+            ],
+            "file-wreck": [
+              { "module": "good-squeeze", "name": "Squeeze", "args": [{ "wreck": "*" }] },
+              { "module": "good-squeeze", "name": "SafeJson"},
+              { "module": "good-file", "args": ["./logs/wreck.log"] }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}
