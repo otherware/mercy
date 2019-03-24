@@ -1,4 +1,4 @@
 {
     extends: 'hapi',
-    rules: { no-shadow: 'off' }
+    rules: { no-shadow: 'off', brace-style: 'off' }
 }
