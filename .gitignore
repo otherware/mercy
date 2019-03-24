@@ -17,11 +17,6 @@ nohup.out
 .DS_Store
 .idea
 
-yarn.l
-yarn.lock
-package-lock.json
-
 node_modules
 
-backup*
 test/fixtures
